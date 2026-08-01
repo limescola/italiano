@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'aiuto dell'amico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F0E9;
+  --bg2:#EFE6DC;
+  --panel:#FCF8F3;
+  --line:#E2D5C8;
+  --ink:#2A2320;
+  --dim:#6E6157;
+  --faint:#A2968A;
+  --accent:#B85566;
+  --accent-soft:#D8A090;
+  --gold:#B85566;
+  --gold-soft:#D8A090;
+  --rose:#B85566;
+  --wine:#8C3B4A;
+  --disp:'Fraunces',Georgia,serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);
+  background-image:radial-gradient(circle at 12% 6%, rgba(184,85,102,.05), transparent 40%),
+    radial-gradient(circle at 88% 3%, rgba(184,85,102,.04), transparent 38%);
+  color:var(--ink);font-family:var(--body);line-height:1.72;
+  font-size:17px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:940px;margin:0 auto;padding:0 32px}
+::selection{background:var(--gold);color:var(--bg)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+img{max-width:100%;display:block}
+
+/* HERO */
+header.hero{padding:150px 0 110px;border-bottom:1px solid var(--line);position:relative}
+.hero .kick{font-family:var(--mono);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--rose);margin-bottom:44px;
+  display:flex;align-items:center;gap:12px}
+.hglyph{width:13px;height:13px;flex:none;fill:var(--accent);opacity:.85}
+.heart-divider{display:flex;align-items:center;justify-content:center;gap:20px;max-width:940px;margin:0 auto;padding:0 32px}
+.heart-divider .hline{height:1px;background:var(--line);flex:1;max-width:180px}
+.heart-divider svg{width:20px;height:20px;fill:var(--accent-soft);flex:none}
+h1{font-family:var(--disp);font-weight:300;font-size:clamp(56px,11vw,128px);line-height:.92;letter-spacing:-.025em;margin:0;
+  font-optical-sizing:auto}
+h1 em{font-style:italic;font-weight:300;color:var(--rose)}
+.hero .sub{max-width:56ch;color:var(--dim);font-size:20px;margin:40px 0 0;line-height:1.65}
+.hero .quote{margin-top:64px;padding-left:28px;border-left:2px solid var(--gold-soft);max-width:640px}
+.hero .quote .it{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(24px,3.6vw,34px);line-height:1.3}
+.hero .quote .ru{color:var(--faint);font-size:15px;margin-top:12px;font-family:var(--mono)}
+.hero-actions{margin-top:60px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--line);color:var(--ink);background:transparent;padding:13px 20px;cursor:pointer;
+  text-decoration:none;display:inline-block;transition:border-color .2s,color .2s,background .2s}
+.btn:hover{border-color:var(--gold);color:var(--gold)}
+.btn.solid{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.btn.solid:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* NAV */
+.chapnav{position:sticky;top:0;z-index:50;background:rgba(244,239,230,.9);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);overflow-x:auto}
+.chapnav ul{display:flex;list-style:none;margin:0;padding:0;min-width:max-content}
+.chapnav a{display:block;padding:16px 18px;color:var(--dim);text-decoration:none;
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;white-space:nowrap;transition:color .2s}
+.chapnav a:hover{color:var(--gold)}
+
+/* SECTIONS */
+section{padding:120px 0 8px;border-bottom:1px solid var(--line)}
+.chapno{font-family:var(--mono);font-size:12px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:300;font-size:clamp(38px,6.5vw,68px);line-height:1;letter-spacing:-.025em;margin:20px 0 0}
+h2 .it{display:block;font-style:italic;font-weight:400;font-size:.42em;color:var(--rose);margin-top:18px;letter-spacing:0}
+.lede{max-width:60ch;color:var(--dim);font-size:20px;line-height:1.62;margin:32px 0 56px}
+h3.sub{font-family:var(--disp);font-weight:400;font-size:30px;letter-spacing:-.01em;margin:72px 0 8px}
+h3.sub + p{max-width:62ch;color:var(--dim);margin:0 0 30px;font-size:17px}
+
+/* TABLE */
+.scroller{overflow-x:auto;margin:0 -32px;padding:0 32px}
+table{width:100%;border-collapse:collapse;font-size:16px;min-width:520px}
+thead th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+  text-align:left;padding:0 20px 16px;font-weight:400;border-bottom:1px solid var(--line)}
+tbody td{padding:20px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--dim);line-height:1.55}
+tbody tr:hover td{background:var(--bg2)}
+tbody td:first-child{color:var(--ink);font-weight:400;white-space:nowrap;font-family:var(--disp);font-style:italic;font-size:19px}
+.it-term{font-style:italic}
+.reg{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--line);padding:2px 7px;border-radius:2px;color:var(--dim);white-space:nowrap}
+.reg.n{border-color:var(--gold-soft);color:var(--gold)}
+
+/* CARDS (flip) */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin-top:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:30px 28px;text-align:left;
+  font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:14px;min-height:150px;
+  transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}
+.card:hover{background:#fff;border-color:var(--accent-soft);transform:translateY(-2px);box-shadow:0 8px 22px rgba(184,85,102,.12)}
+.card .it{font-family:var(--disp);font-style:italic;font-weight:400;font-size:24px;line-height:1.25;color:var(--ink)}
+.card .lvl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--gold)}
+.card .front-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.card .rvl{display:none;padding-top:16px;border-top:1px solid var(--line)}
+.card.open .rvl{display:block}
+.card.open .front-foot .prompt{display:none}
+.card .prompt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+.card .rvl .ru{font-family:var(--disp);font-weight:400;font-size:21px;color:var(--ink);margin-bottom:10px;line-height:1.35}
+.rvl-heart{width:14px;height:14px;fill:var(--accent-soft);margin-right:8px;vertical-align:baseline;display:inline}
+.card .note{font-size:15px;color:var(--dim);line-height:1.62}
+.card .lit{font-family:var(--mono);font-size:12px;color:var(--gold);margin-top:10px}
+
+/* NOTE */
+.note-block{border-left:2px solid var(--gold-soft);padding:6px 0 6px 30px;margin:56px 0;max-width:70ch}
+.note-block .h{font-family:var(--disp);font-weight:400;font-size:24px;margin-bottom:12px}
+.note-block p{color:var(--dim);margin:0;font-size:17px;line-height:1.65}
+
+/* GYM */
+.tabs{display:flex;gap:0;flex-wrap:wrap;margin-bottom:0;border:1px solid var(--line);border-bottom:0;width:fit-content;max-width:100%}
+.tab{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);
+  background:transparent;border:0;border-right:1px solid var(--line);padding:13px 18px;cursor:pointer;transition:color .2s,background .2s}
+.tab:last-child{border-right:0}
+.tab[aria-selected="true"]{background:var(--rose);color:#fff}
+.stage{border:1px solid var(--line);padding:44px;min-height:300px;background:var(--bg2)}
+.q{font-family:var(--disp);font-weight:400;font-size:clamp(22px,3vw,30px);line-height:1.3;margin:0 0 28px}
+.q .em{font-style:italic;color:var(--rose)}
+.opts{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.opt{text-align:left;font:inherit;color:var(--ink);background:var(--bg);border:0;padding:15px 18px;cursor:pointer;
+  font-size:16px;transition:background .2s}
+.opt:hover{background:var(--panel)}
+.opt.right{background:var(--gold);color:var(--panel)}
+.opt.wrong{background:var(--wine);color:var(--panel)}
+.opt[disabled]{cursor:default}
+.feedback{margin-top:20px;color:var(--dim);font-size:15.5px;display:none;line-height:1.6}
+.feedback.show{display:block}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:18px}
+.flash{border:1px solid var(--line);padding:44px 26px;text-align:center;margin-bottom:20px;min-height:180px;
+  display:flex;flex-direction:column;justify-content:center;gap:16px;background:var(--bg)}
+.flash .it{font-family:var(--disp);font-style:italic;font-size:clamp(24px,4vw,36px);color:var(--ink)}
+.flash .ru{font-family:var(--disp);font-size:20px;color:var(--gold)}
+.flash .hidden{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+
+/* CERT */
+.cert{border:1px solid var(--gold-soft);padding:48px 34px;text-align:center;margin-top:26px;display:none;background:var(--bg2)}
+.cert.show{display:block}
+.cert .top{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
+.cert .rank{font-family:var(--disp);font-weight:400;font-style:italic;font-size:clamp(32px,6vw,56px);color:var(--rose);margin:18px 0;line-height:1}
+.cert .line{color:var(--dim);max-width:48ch;margin:0 auto;font-size:17px}
+.cert .seal{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-top:30px}
+
+footer{padding:110px 0 130px;border-bottom:0}footer .fr{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(28px,4.5vw,44px);max-width:20ch;line-height:1.2}
+footer p{color:var(--faint);max-width:52ch;margin:30px 0 0;font-size:16px;line-height:1.6}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .heart-divider{padding:0 20px;gap:12px}
+  .heart-divider .hline{max-width:80px}
+
+  header.hero{padding:64px 0 56px}
+  .hero .kick{margin-bottom:28px;font-size:11px;letter-spacing:.2em;gap:8px;flex-wrap:wrap}
+  h1{font-size:clamp(44px,15vw,72px)}
+  .hero .sub{font-size:17px;margin-top:28px}
+  .hero .quote{margin-top:40px;padding-left:20px}
+  .hero .quote .it{font-size:22px}
+  .hero-actions{margin-top:36px;gap:10px}
+  .btn{padding:12px 16px;font-size:11px}
+
+  .chapnav a{padding:13px 14px}
+
+  section{padding:64px 0 8px}
+  h2{font-size:clamp(34px,10vw,46px)}
+  h2 .it{font-size:.5em;margin-top:12px}
+  .lede{font-size:18px;margin:24px 0 40px}
+  h3.sub{font-size:25px;margin:52px 0 6px}
+  .chapno{font-size:11px;letter-spacing:.24em}
+
+  .scroller{margin:0 -20px;padding:0 20px}
+  table{font-size:15px}
+  thead th{padding:0 14px 12px}
+  tbody td{padding:16px 14px}
+  tbody td:first-child{font-size:17px}
+
+  .cards{grid-template-columns:1fr;gap:12px}
+  .card{padding:24px 22px;min-height:0}
+  .card .it{font-size:22px}
+
+  .note-block{padding-left:22px;margin:44px 0}
+  .stage{padding:26px 22px}
+  .q{font-size:22px}
+  .opt{padding:14px 16px;font-size:15px}
+
+  .cert{padding:36px 24px}
+  footer{padding:72px 0 90px}
+  .heart-divider svg{width:18px;height:18px}
+}
+
+@media (max-width:380px){
+  h1{font-size:40px}
+  .hero .kick{justify-content:flex-start}
+  .btn{flex:1;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kick"><svg class="hglyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-9.3-9C1.2 8.3 2.5 5 5.6 5c2 0 3.2 1.3 3.9 2.4l.1.2.1-.2C10.4 6.3 11.6 5 13.6 5c3.1 0 4.4 3.3 2.9 6-2.3 4.4-9.3 9-9.3 9z"/></svg> Русско-итальянский · от A2 до C2 <svg class="hglyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-9.3-9C1.2 8.3 2.5 5 5.6 5c2 0 3.2 1.3 3.9 2.4l.1.2.1-.2C10.4 6.3 11.6 5 13.6 5c3.1 0 4.4 3.3 2.9 6-2.3 4.4-9.3 9-9.3 9z"/></svg></div>
+    <h1>L'aiuto <em>dell'amico</em></h1>
+    <p class="sub">Учебник даёт «la mela è rossa». Всё остальное — счёт в баре, ссору с соседом, газетный заголовок с двойным дном — приходится добирать самому. Вот это самое остальное, с пометками, кто и где так говорит.</p>
+    <div class="quote">
+      <div class="it" id="qIt">…</div>
+      <div class="ru" id="qRu">…</div>
+    </div>
+    <div class="hero-actions">
+      <button class="btn solid" id="roll">Ещё фразу</button>
+      <a class="btn" href="#c1">Начать</a>
+      <a class="btn" href="#esame">Экзамен</a>
+    </div>
+  </div>
+</header>
+
+<nav class="chapnav" aria-label="Разделы">
+  <ul>
+    <li><a href="#c1">I · Grammatica oscena</a></li>
+    <li><a href="#c2">II · Politica</a></li>
+    <li><a href="#c3">III · Parolacce</a></li>
+    <li><a href="#c4">IV · Doppi sensi</a></li>
+    <li><a href="#c5">V · Flirt</a></li>
+    <li><a href="#c6">VI · Appuntamento</a></li>
+    <li><a href="#c7">VII · Litigi</a></li>
+    <li><a href="#palestra">Тренажёр</a></li>
+    <li><a href="#esame">Экзамен</a></li>
+  </ul>
+</nav>
+
+<main id="main"></main>
+
+<section id="palestra">
+  <div class="wrap">
+    <div class="chapno">Palestra</div>
+    <h2>Тренажёр<span class="it">mettiti alla prova</span></h2>
+    <p class="lede">Четыре режима. Карточки — на память, остальное — на понимание того, где именно язык подставит.</p>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-mode="flash">Карточки</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="doppio">Двойное дно</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="falsi">Ложные друзья</button>
+      <button class="tab" role="tab" aria-selected="false" data-mode="regione">Регион</button>
+    </div>
+    <div class="stage" id="stage"></div>
+  </div>
+</section>
+
+<section id="esame">
+  <div class="wrap">
+    <div class="chapno">Esame</div>
+    <h2>Экзамен<span class="it">la prova finale</span></h2>
+    <p class="lede">Пятнадцать вопросов из всех разделов. В конце — ранг. Пересдавать можно сколько угодно.</p>
+    <div class="stage" id="exam"></div>
+    <div class="cert" id="cert">
+      <div class="top">Certificato di</div>
+      <div class="rank" id="certRank">…</div>
+      <p class="line" id="certLine"></p>
+      <div class="seal">L'aiuto dell'amico · rilasciato oggi · non valido in Vaticano</div>
+    </div>
+  </div>
+</section>
+
+<div class="heart-divider" aria-hidden="true">
+  <span class="hline"></span>
+  <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9.3-9C1.2 8.3 2.5 5 5.6 5c2 0 3.2 1.3 3.9 2.4l.1.2.1-.2C10.4 6.3 11.6 5 13.6 5c3.1 0 4.4 3.3 2.9 6-2.3 4.4-9.3 9-9.3 9z"/></svg>
+  <span class="hline"></span>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fr">Buona fortuna, e occhio ai doppi sensi.</div>
+    <p>Сделано для человека, который взялся за итальянский всерьёз и уже дошёл до той стадии, когда учебник начал недоговаривать.</p>
+  </div>
+</footer>
+
+<script>
+/* ===== helper ===== */
+function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
+
+/* ===== TABLES DATA ===== */
+const T_CAZZO = {
+ head:["Форма","Функция","Перевод"],
+ rows:[
+  ["Cazzo!","междометие","Блядь! Хуй!"],
+  ["Che cazzo vuoi?","усилитель вопроса","Какого хуя тебе надо?"],
+  ["Non me ne frega un cazzo","отрицательное количество","Мне на это насрать"],
+  ["Un film del cazzo","прилагательное качества","Хуёвый фильм"],
+  ["Col cazzo","эмфатический отказ","Хуй там"],
+  ["Cazzo ne so","снятие ответственности","Хуй его знает"],
+  ["Fatti i cazzi tuoi","требование дистанции","Не лезь не в своё ебаное дело"],
+  ["A cazzo di cane","наречие образа действия","Через жопу, как попало"],
+  ["Che cazzo di giornata","оценочный оборот","Ну и ебаный день"],
+  ["Una cazzata","существительное","Хуйня, глупость, косяк"],
+  ["Cazzeggiare","глагол","Хуйнёй страдать"],
+  ["Incazzarsi","возвратный глагол","Взбеситься, разъяриться"],
+  ["Incazzato nero","превосходная степень","Злой как чёрт"],
+  ["Cazzaro","имя деятеля","Пиздабол, пустозвон"],
+  ["Cazzimma","абстрактное понятие","Неаполитанское: хватка, холодная жёсткость, умение не жалеть. Переводится с трудом."]
+ ]
+};
+const T_PORCA = {
+ head:["Выражение","Дословно","Где обычно услышишь"],
+ rows:[
+  ["Porca paletta","свинская лопатка","Почти детское. Годится и в мультфильме."],
+  ["Porca miseria","свинская нищета","При чужих родителях, в офисе, где угодно."],
+  ["Porca vacca","свинская корова","Среди своих, но вполне безопасно."],
+  ["Porco cane","свинская собака","На севере эту ступень особенно любят."],
+  ["Porca puttana","«свинья-шлюха», грубое","Уронил что-то тяжёлое на ногу."],
+  ["Porca troia","«свинья-блядь», ступенью выше","Верхняя граница анатомической линии. Выше идут уже bestemmie, а это другая история."]
+ ]
+};
+const T_PUTTANA = {
+ head:["Выражение","Значение","Чем любопытно"],
+ rows:[
+  ["andare a puttane","пойти прахом, развалиться","«Il progetto è andato a puttane» — про сорванный проект. Так говорят и на планёрках, не только в баре."],
+  ["una puttanata","ерунда, пустяк","Может значить и «это чушь», и «да это на пять минут»."],
+  ["figlio di puttana","сукин сын, сын шлюхи","Иногда почти восхищение: «quel figlio di puttana ha vinto di nuovo» — «опять этот ублюдок выиграл»."],
+  ["mignotta","шлюха, римский вариант","Отсюда «figlio de mignotta» — чистый романеско."],
+  ["puttaniere","бабник, ходок по шлюхам","Про мужчину, чаще с усмешкой, чем с осуждением."],
+  ["casino","бардак, шум, суматоха","Вот и разгадка ложного друга: casino когда-то означало публичный дом. Отсюда «che casino» про беспорядок. Грубость давно стёрлась."],
+  ["lucciola","светлячок","Мягкий газетный эвфемизм. На фоне остального ряда почти поэтичный."],
+  ["magnaccia","сутенёр","От римского magnare, «есть». Дословно — «тот, кто ест за чужой счёт». Северный синоним — pappone."]
+ ]
+};
+const T_FOTTERE = {
+ head:["Форма","Значение","Пример"],
+ rows:[
+  ["fottere","прямое: трахать · переносное: кинуть, обмануть","Исходный смысл вульгарный, «трахать», но в живой речи почти всегда второй: «mi hanno fottuto sul prezzo» — надули с ценой."],
+  ["fottersene","плевать на что-то","«Me ne fotto» — тот же смысл, что «me ne frego», но грубее."],
+  ["essere fottuto","влипнуть, попасть","«Sono fottuto» — мне конец, без всякой эротики."],
+  ["fottuto","чёртов, проклятый","«Un fottuto disastro» — усилитель перед существительным."],
+  ["un fottio di","уйма, куча","«C'era un fottio di gente» — народу была тьма."],
+  ["fottiti","иди на хуй, пошёл ты","Тут переносного смысла уже нет."]
+ ]
+};
+const T_POLITICA = {
+ head:["Термин","Прямое / исходное","Как это работает в политике"],
+ rows:[
+  ["ammucchiata","куча-мала; на сленге — групповой секс","Так называют рыхлую коалицию всех со всеми. Второй, откровенный смысл автор держит в уме — он и придаёт слову иронию."],
+  ["inciucio","неаполитанское «шуры-муры, тайная возня»; в быту — интрижка, любовная история","В политике — закулисная сделка между теми, кто на публике враждует. «C'è un inciucio tra loro» вне политики значит «между ними что-то есть». Глагол — inciuciare."],
+  ["trombato","от вульгарного trombare, «трахать»; отсюда буквально «оттраханный»","В газетах — про кандидата, которого прокатили на выборах: «è stato trombato alle regionali». Грубый корень и сухая формулировка уживаются в одном заголовке."],
+  ["paraculo","дословно «прикрывающий зад»","Ловкач, который всегда вовремя меняет сторону и выходит сухим. Почти нейтральная характеристика типа политика."],
+  ["cazzaro","от cazzo; трепач, пустозвон","Тот, кто много обещает и ничего не делает. Римское словцо, прилипшее к нескольким публичным фигурам как прозвище."],
+  ["ci hanno inculato","дословно анатомическое; на деле «нас развели, кинули»","Стандартная реакция на бюджет, налоги и тарифы. Прямой смысл давно стёрся до «нас поимели» в переносном."],
+  ["poltrona","кресло; в политике — тёплая должность","«Attaccato alla poltrona» — вцепился в кресло, не хочет уходить. Отсюда poltronificio: ведомство или партия, которая плодит новые посты, комитеты и министерские кресла только ради того, чтобы раздать их своим. Дословно — «фабрика кресел»."]
+ ]
+};
+
+/* ===== SECTIONS ===== */
+const SECTIONS = [
+{
+ id:"c1", no:"Capitolo I", title:"Grammatica oscena", it:"один корень, пятнадцать ролей",
+ lede:"Начнём с того, чем язык действительно удивляет. Несколько бранных корней разрослись в целые грамматические системы: одно слово работает и существительным, и глаголом, и отрицанием, и оценкой качества.",
+ blocks:[
+  {h:"Парадигма одного корня",p:"Пятнадцать функций от одной основы. Читается сверху вниз почти как таблица склонения.",table:T_CAZZO},
+  {h:"Лестница porca",p:"Porca (или porco) значит «свинья», и в связке с почти любым существительным превращается в ругательное восклицание — итальянский аналог нашего «чёрт возьми» или «ёлки-палки». Это не оскорбление в чей-то адрес, а выдох досады: промахнулся, опоздал, разбил, застрял в пробке. Соль в том, что второе слово можно ставить какое угодно, и от него зависит грубость: чем ближе к анатомии, тем крепче. Одна конструкция, шесть ступеней громкости.",table:T_PORCA},
+  {h:"Семейство puttana",p:"Самая продуктивная основа в языке. Прямое значение встречается реже всех переносных.",table:T_PUTTANA},
+  {h:"Fottere и его дети",p:"Случай, когда переносные значения почти вытеснили исходное. Девять употреблений из десяти — не про постель.",table:T_FOTTERE}
+ ]
+},
+{
+ id:"c2", no:"Capitolo II", title:"Politica", it:"язык власти и его второе дно",
+ lede:"Отдельное удовольствие: итальянская политическая хроника наполовину состоит из телесного и постельного жаргона, причём вполне всерьёз — в заголовках и в вечерних ток-шоу. Не зная второго слоя, половину иронии пропускаешь.",
+ blocks:[
+  {table:T_POLITICA}
+ ],
+ note:{h:"Почему так вышло",p:"Итальянская политическая журналистика традиционно пишется разговорным языком, а разговорный итальянский телесен насквозь. Отсюда эффект, которого в русском нет: газета может назвать коалицию словом из совсем не парламентского словаря, и это будет скорее стилистикой, чем скандалом."}
+},
+{
+ id:"c3", no:"Capitolo III", title:"Parolacce", it:"брань и её география",
+ lede:"Итальянская ругань стоит на двух опорах — анатомии и религии. Ниже анатомическая половина: она мягче, повседневнее и сильно зависит от региона.",
+ cards:[
+  {it:"Che palle!",ru:"Заебало!",lvl:"РАЗГ · везде",lit:"дословно: какие яйца",note:"Рекордсмен по частоте. Про скучный фильм, очередь, дождь. Говорят и при родителях, хоть корень и грубый."},
+  {it:"Cazzo!",ru:"Блядь! Хуй!",lvl:"ГРУБО · везде",note:"Универсальный шуруп итальянской брани. Che cazzo dici — «ты что несёшь», un cazzo — «нихуя», del cazzo — «хуёвый»."},
+  {it:"Stronzo, stronza",ru:"Мудак, сука",lvl:"ГРУБО · везде",note:"Дословно «кусок говна». Личное оскорбление, не восклицание. Всегда адресно."},
+  {it:"Coglione",ru:"Мудак, долбоёб",lvl:"ГРУБО · везде",lit:"дословно: яйцо, тестикула",note:"Чуть добрее stronzo: тот злой, этот скорее тупой."},
+  {it:"Mi hai rotto le scatole.",ru:"Ты меня заебал.",lvl:"РАЗГ · везде",lit:"дословно: сломал мне коробки",note:"Смягчённая версия. Грубее — «mi hai rotto i coglioni», «сломал мне яйца»."},
+  {it:"Vaffanculo.",ru:"Иди на хуй.",lvl:"ГРУБО · везде",lit:"дословно: иди в жопу",note:"Знают все, и потому произносится реже и весомее, чем можно подумать."},
+  {it:"Minchia!",ru:"Ебать! Охуеть!",lvl:"РАЗГ · Сицилия",note:"Дословно сицилийское название члена, но в речи — чистое «ничего себе». И восторг, и ужас, всё решает интонация."},
+  {it:"Pirla",ru:"Придурок, дурень",lvl:"МЯГКО · Милан",note:"Ломбардия и север. Почти ласковое."},
+  {it:"Li mortacci tua!",ru:"Да чтоб ты сдох!",lvl:"ГРУБО · Рим",lit:"обращение к покойным предкам собеседника",note:"Между друзьями — почти приветствие. С чужим — начало драки."},
+  {it:"Ma che sei scemo?",ru:"Ты что, дебил?",lvl:"МЯГКО · Тоскана",note:"Тосканское «ma che». Возмущение, которое почти никого не задевает."},
+  {it:"Che sfiga!",ru:"Вот же пиздец не повезло!",lvl:"РАЗГ · везде",note:"Sfigato — неудачник, лох. Корень грубый (от figa), само слово ходовое."}
+ ],
+ note:{h:"Про bestemmie",p:"Богохульства с именами святых — отдельный класс, до 1999 года уголовный, теперь административный. Их частота заметно растёт к северо-востоку: в Венето их роняют почти как связки, в Неаполе почти нет. На телевидении за них до сих пор извиняются в эфире."}
+},
+{
+ id:"c4", no:"Capitolo IV", title:"Doppi sensi", it:"слова с двойным дном",
+ lede:"Уровень C2 отличается от C1 не запасом синонимов, а тем, что человек слышит второе значение. Половина этих слов живёт двойной жизнью: одно значение постельное, другое бытовое, и звучат они одинаково. Это словарь на узнавание.",
+ cards:[
+  {it:"venire",ru:"приходить · кончить",lvl:"смотри контекст",note:"Самое коварное слово. «Vengo subito» — «сейчас приду», и звучит это сто раз в день. Второй смысл включается только контекстом."},
+  {it:"scopare",ru:"подметать · трахать, ебать",lvl:"ВУЛЬГ во 2-м смысле",note:"Поэтому уборку зовут pulire, а метлу scopa трогают молча."},
+  {it:"eccitato",ru:"взволнован · возбуждён",lvl:"чаще нейтральное",note:"«Sono eccitato per il viaggio» — просто «жду не дождусь поездки». Постельный смысл дал бы arrapato."},
+  {it:"una sega",ru:"пила · дрочить (farsi una sega) · sega mentale — загон",lvl:"смотри контекст",note:"Farsi una sega дословно «сделать себе пилу», грубое «дрочить». Зато «che sega mentale!» — «ну ты и накрутил себя», и в офисе звучит спокойно."},
+  {it:"che culo!",ru:"вот повезло!",lvl:"РАЗГ",note:"Culo слово грубое, но в этом обороте значит чистую удачу. Обратное — che sfiga."},
+  {it:"barzotto",ru:"о члене: полувставший, слабая эрекция; о вещах: так себе, никакой",lvl:"РАЗГ",note:"Исходно про яйцо всмятку-вкрутую и погоду «на полпути». В сленге закрепилось прежде всего про неполную эрекцию, отсюда и переносное: un film barzotto, una ripresa barzotta — вялый, недоделанный."},
+  {it:"figata",ru:"класс, отпад",lvl:"РАЗГ",note:"Однокоренное figa вульгарно, figata почти нет. Разница в две буквы и целый регистр."},
+  {it:"inculare",ru:"дословно «выебать в жопу» · на деле кинуть, обмануть",lvl:"ВУЛЬГ",note:"Прямое значение анатомическое, но в девяти случаях из десяти — про деньги и налоговую."},
+  {it:"le corna",ru:"рога · оберег от сглаза",lvl:"смотри контекст",note:"Fare le corna значит и «ему изменяют», и «тьфу-тьфу, не сглазить». Смысл решает направление руки."},
+  {it:"pomiciare",ru:"целоваться взасос",lvl:"РАЗГ",note:"Север скажет limonare (от «лимона»), Рим — pomiciare, Тоскана — slinguare."}
+ ]
+},
+{
+ id:"c5", no:"Capitolo V", title:"Flirt", it:"после такого — разрядка",
+ lede:"После тяжёлой артиллерии — что полегче. Комплименты по возрастающей и, что важнее, отказы: понять, что отшили тебя, тот же навык, что и отшить самому.",
+ cards:[
+  {it:"Posso offrirti da bere?",ru:"Можно тебя угостить?",lvl:"A1 · безопасно",note:"Самая спокойная фраза раздела. Offrire — угощать, не «предлагать»."},
+  {it:"Che fai di bello stasera?",ru:"Чем занимаешься вечером?",lvl:"A2",lit:"дословно: что делаешь красивого",note:"Di bello вставляется куда угодно: che mangi di bello, che leggi di bello."},
+  {it:"Hai degli occhi pazzeschi.",ru:"У тебя невероятные глаза.",lvl:"B1",lit:"дословно: безумные глаза",note:"Pazzesco — универсальный усилитель для чего угодно."},
+  {it:"Mi fai impazzire.",ru:"Ты сводишь меня с ума.",lvl:"B1",note:"Fare плюс инфинитив — «заставлять делать». Mi fai ridere — «ты меня смешишь»."},
+  {it:"Sei uno schianto.",ru:"Ты сногсшибательная.",lvl:"B2 · с юмором",lit:"schianto — авария, крушение",note:"Комплимент грубоватый и слегка из восьмидесятых. Работает только в шутку."},
+  {it:"Ci ha provato con me.",ru:"Он ко мне подкатывал.",lvl:"B2",note:"Provarci — клеиться. Одна из самых частых фраз в пересказах вечера."},
+  {it:"Non sono interessata.",ru:"Мне неинтересно.",lvl:"A2 · отказ",note:"Короткий, вежливый, окончательный."},
+  {it:"Sono impegnata.",ru:"Я занята, у меня есть человек.",lvl:"A2 · отказ",note:"Impegnato — «в отношениях», не путать с occupato про туалет."},
+  {it:"Non me la sento.",ru:"Я к этому не готова.",lvl:"B2",note:"Мягкое, но твёрдое «нет». Годится от свидания до работы."},
+  {it:"Ma vai a quel paese!",ru:"Да иди ты куда подальше!",lvl:"B1",lit:"дословно: иди в ту деревню",note:"Смягчённая замена vaffanculo. Так ругаются при детях."}
+ ]
+},
+{
+ id:"c6", no:"Capitolo VI", title:"Appuntamento", it:"свидание и счёт",
+ lede:"От «встретимся» до «зайдёшь». Здесь больше всего бытовой лексики и меньше всего романтики — что и делает раздел полезным.",
+ cards:[
+  {it:"Ti va di uscire una sera?",ru:"Погуляем как-нибудь вечером?",lvl:"A2",note:"Uscire con qualcuno — встречаться. Escono insieme — «они вместе»."},
+  {it:"Passo a prenderti alle otto.",ru:"Заеду за тобой в восемь.",lvl:"B1",note:"Passare a prendere — заехать за кем-то."},
+  {it:"Offro io.",ru:"Я плачу.",lvl:"A2",note:"Говори первым и уверенно. Это ритуал, а не благотворительность: замешкаешься — окажешься в споре, который проиграешь."},
+  {it:"Facciamo alla romana?",ru:"Разделим счёт?",lvl:"B1",note:"Каждый за себя, несмотря на пышное название."},
+  {it:"Vuoi salire a bere qualcosa?",ru:"Зайдёшь выпить чего-нибудь?",lvl:"B1",note:"Salire — подняться. Все понимают, что речь не совсем про напиток."},
+  {it:"Preferisco andare piano.",ru:"Предпочитаю не спешить.",lvl:"B1",note:"Andare piano тут про темп отношений, не про скорость."},
+  {it:"Mi sono divertita un sacco.",ru:"Мне было очень весело.",lvl:"B1",lit:"un sacco — мешок, то есть «куча»",note:"Лучший сигнал, что вечер удался."},
+  {it:"Ci sentiamo su WhatsApp?",ru:"Спишемся в вотсапе?",lvl:"A2",note:"Реалистичнее, чем просить номер. Sentirsi — «быть на связи»."}
+ ]
+},
+{
+ id:"c7", no:"Capitolo VII", title:"Litigi e addio", it:"ссора и расставание",
+ lede:"Итальянская ссора громче русской и заканчивается быстрее. Главное — не принять громкость за катастрофу.",
+ cards:[
+  {it:"Dobbiamo parlare.",ru:"Нам надо поговорить.",lvl:"A2",note:"Самая страшная фраза языка. В хорошем контексте её не слышал никто."},
+  {it:"Ti voglio bene.",ru:"Ты мне дорог (по-дружески).",lvl:"A2 · важно",note:"Тёплое «люблю» без романтики — друзьям и семье. Романтическое — ti amo, и только партнёру."},
+  {it:"Mi ha mollato.",ru:"Он(а) меня бросил(а).",lvl:"B1",lit:"mollare — отпустить канат",note:"Морское происхождение, разговорнее, чем lasciare."},
+  {it:"Ci siamo lasciati.",ru:"Мы расстались.",lvl:"B1",note:"Взаимное — значит приличное. Так говорят вслух, mollato — только близким."},
+  {it:"Mi ha tradita.",ru:"Он мне изменил.",lvl:"B1",note:"Окончание согласуется с тем, кого предали: tradita — женщину, tradito — мужчину."},
+  {it:"Mi ha messo le corna.",ru:"Мне изменили (наставили рога).",lvl:"B2",note:"Дословно «надел мне рога», то есть партнёр гулял на стороне. Cornuto, рогоносец, — тяжёлое оскорбление. Тот же жест пальцами вниз означает уже «не сглазить»."},
+  {it:"Non mi cercare più.",ru:"Больше меня не ищи.",lvl:"B1",note:"Отрицательный императив на «ты» берёт инфинитив: non cercare, non dire."},
+  {it:"Ti auguro il meglio, davvero.",ru:"Желаю тебе всего лучшего, правда.",lvl:"B2",note:"Слово davvero тут делает всю работу — и может значить ровно обратное."}
+ ]
+}
+];
+
+/* ===== QUIZ DATA ===== */
+const DOPPIO = [
+ {q:"Коллега пишет «vengo subito». Это…",o:["Он сейчас придёт","Что-то неприличное","Он уходит"],a:0,e:"Venire это прежде всего «приходить». Слышишь ты это по сто раз в день, второй смысл включает только конкретный контекст."},
+ {q:"«Il progetto è andato a puttane» значит…",o:["Проект стал непристойным","Проект пошёл прахом","Проект подорожал"],a:1,e:"Andare a puttane — «развалиться, сорваться». На планёрке это никого не смущает."},
+ {q:"«Mi hanno fottuto sul prezzo» — это про…",o:["Секс","Обман с ценой","Скидку"],a:1,e:"Fottere в большинстве случаев значит «кинуть, надуть». Прямое значение почти вытеснено."},
+ {q:"«Una ripresa barzotta» в экономической колонке это…",o:["Бурный рост","Вялое восстановление","Обвал"],a:1,e:"Barzotto вне разговора о человеке значит «так себе, ни то ни сё»."},
+ {q:"«A cazzo di cane» описывает…",o:["Собаку","Работу, сделанную криво","Быстроту"],a:1,e:"Наречие образа действия. Про сборку мебели, ремонт и чужой код."},
+ {q:"Cazzimma по-неаполитански это…",o:["Глупость","Хватка, холодная жёсткость","Усталость"],a:1,e:"Понятие почти философское: умение добиваться своего, не сентиментальничая."},
+ {q:"«Ammucchiata» в политической заметке это…",o:["Митинг","Разношёрстная коалиция","Скандал"],a:1,e:"Слово с двойным дном взято сознательно: в нём уже зашита оценка союза как беспорядочного."},
+ {q:"«Che culo!» после выигрыша значит…",o:["Ругательство","Вот повезло","Оскорбление"],a:1,e:"Слово грубое, но в этом обороте — чистая удача. Обратное — sfiga."},
+ {q:"«Che sega mentale!» это…",o:["Непристойность","Ты надумал проблему на пустом месте","Ты устал"],a:1,e:"Sega mentale — загон, самонакрутка. В офисе звучит спокойно, хотя корень тот же."},
+ {q:"Рожки, направленные вниз, означают…",o:["Оскорбление","Оберег от сглаза","Победу"],a:1,e:"Направление решает: вниз — защита, в человека — обвинение в измене."}
+];
+const FALSI = [
+ {q:"Magazzino это…",o:["Магазин","Склад","Журнал"],a:1,e:"Магазин — negozio, журнал — rivista."},
+ {q:"Camera это…",o:["Фотоаппарат","Комната","Тюремная камера"],a:1,e:"Фотоаппарат — macchina fotografica. Camera doppia — двухместный номер."},
+ {q:"Firma это…",o:["Фирма","Подпись","Твёрдость"],a:1,e:"Фирма — azienda или ditta. Firmare — подписывать."},
+ {q:"Stipendio это…",o:["Стипендия","Зарплата","Пособие"],a:1,e:"Стипендия — borsa di studio."},
+ {q:"Casino (ударение на A) это…",o:["Казино","Бардак, шум","Домик"],a:1,e:"Казино — casinò, ударение на конце. «Che casino!» — «ну и бардак»."},
+ {q:"Burro это…",o:["Осёл","Сливочное масло","Бюро"],a:1,e:"Осёл — asino. В испанском burro осёл, в итальянском масло."},
+ {q:"«Che figura!» значит…",o:["Какая фигура","Какой позор","Какая цифра"],a:1,e:"Brutta figura — опозориться, bella figura — произвести впечатление."},
+ {q:"Morbido это…",o:["Мрачный","Мягкий, нежный","Морской"],a:1,e:"«Una pelle morbida» — «нежная кожа»."},
+ {q:"Confetti это…",o:["Конфетти","Драже с свадьбы","Конфеты"],a:1,e:"Конфетти — coriandoli. Confetti раздают гостям на свадьбах."},
+ {q:"Fabbrica это…",o:["Фабрика, завод","Ткань","Выдумка"],a:0,e:"Тут совпало, но ткань — stoffa, а fabbricare — «выдумывать». Проверять всё равно стоит."}
+];
+const REGIONE = [
+ {f:"Minchia!",a:"Сицилия",o:["Сицилия","Милан","Венеция","Турин"],e:"Настолько сицилийское, что по одному слову опознают земляка где угодно."},
+ {f:"Pirla",a:"Милан",o:["Неаполь","Милан","Рим","Бари"],e:"Ломбардия. На юге скажут scemo или fesso."},
+ {f:"Li mortacci tua",a:"Рим",o:["Рим","Флоренция","Палермо","Генуя"],e:"Чистый романеско. За пределами Лацио звучит как цитата."},
+ {f:"Jamme ja!",a:"Неаполь",o:["Неаполь","Триест","Болонья","Верона"],e:"«Давай, пошли». Неаполитанский — отдельный язык, а не акцент."},
+ {f:"Ma che sei scemo?",a:"Тоскана",o:["Тоскана","Сардиния","Калабрия","Милан"],e:"Тосканское «ma che» плюс проглоченная C: «la hoha hola»."},
+ {f:"Bella zì!",a:"Рим",o:["Рим","Милан","Палермо","Падуя"],e:"Молодёжное римское приветствие. Zì от zio — «чувак», дословно «дядя»."},
+ {f:"Guagliò!",a:"Неаполь",o:["Неаполь","Турин","Тренто","Анкона"],e:"Обращение к парню, от guaglione. Севернее Рима не встречается."}
+];
+const ESAME = [
+ {q:"«A cazzo di cane» это…",o:["Про собаку","Криво, как попало","Быстро"],a:1,e:"Наречие образа действия из парадигмы cazzo."},
+ {q:"«Il progetto è andato a puttane» значит…",o:["Стал непристойным","Пошёл прахом","Подорожал"],a:1,e:"Andare a puttane — «развалиться». Говорят на работе."},
+ {q:"Откуда «che casino» в значении «бардак»?",o:["От слова «дом»","От названия публичного дома","От казино"],a:1,e:"Casino изначально — бордель. Смысл ушёл в бытовой, грубость стёрлась."},
+ {q:"«C'era un fottio di gente» значит…",o:["Народу была тьма","Народ ругался","Народу не было"],a:0,e:"Un fottio di — просто «уйма». Мирный потомок немирного глагола."},
+ {q:"«Trombato alle regionali» значит…",o:["Победил","Прокатили на выборах","Снялся"],a:1,e:"Вульгарный глагол в электоральном значении, при этом газетная норма."},
+ {q:"«Ammucchiata» в заголовке про парламент это…",o:["Драка","Разношёрстная коалиция","Голосование"],a:1,e:"Второй смысл слова автор держит в уме — он и есть оценка."},
+ {q:"Политика зовут «paraculo». Это про…",o:["Трусость","Умение вовремя выкрутиться","Коррупцию"],a:1,e:"Дословно «прикрывающий зад». Почти нейтральная характеристика."},
+ {q:"«Sono eccitato per il concerto» значит…",o:["Возбуждён в постельном смысле","В предвкушении концерта","Раздражён"],a:1,e:"Eccitato — нейтральное «взволнован». Постельный смысл дал бы arrapato."},
+ {q:"Что грубее по регистру?",o:["Porca miseria","Porca troia","Одинаково"],a:1,e:"Miseria — самая мягкая ступень, troia — верхняя граница анатомической линии."},
+ {q:"«Che sega mentale» это…",o:["Непристойность","Надуманная проблема","Головная боль"],a:1,e:"Загон, самонакрутка. В офисе звучит спокойно."},
+ {q:"Stipendio это…",o:["Стипендия","Зарплата","Премия"],a:1,e:"Стипендия — borsa di studio."},
+ {q:"«Vuoi salire a bere qualcosa?» на самом деле про…",o:["Напиток","Приглашение остаться","Лифт"],a:1,e:"Все участники понимают подтекст, в этом и функция фразы."},
+ {q:"«Mi ha tradito» произносит…",o:["Мужчина о партнёрше","Женщина о партнёре","Оба одинаково"],a:0,e:"Окончание согласуется с пострадавшим: женщина скажет «mi ha tradita»."},
+ {q:"«Ti amo» уместно сказать…",o:["Другу","Партнёру","Матери"],a:1,e:"Друзьям и родителям — ti voglio bene. Ti amo только романтически."},
+ {q:"Рожки вниз означают…",o:["Оскорбление","Оберег от сглаза","Победу"],a:1,e:"Направление решает: вниз защита, в человека обвинение в измене."}
+];
+const RANKS = [
+ {min:15,r:"Madrelingua onorario",l:"Ты слышишь второе дно раньше, чем говорящий успевает его вложить."},
+ {min:13,r:"Romano de Roma",l:"Тебя можно выпускать в бар в Трастевере без сопровождения."},
+ {min:10,r:"Quasi di famiglia",l:"Уровень «знакомство с родителями». Ещё немного — и ты опасен."},
+ {min:7,r:"Turista sveglio",l:"Понимаешь, что происходит, но иногда на полсекунды позже, чем нужно."},
+ {min:4,r:"Straniero simpatico",l:"Тебе прощают всё, потому что ты симпатичный иностранец. Это ненадолго."},
+ {min:0,r:"Disastro totale",l:"Ты попросил метлу не тем глаголом. Раздел I ждёт наверху."}
+];
+
+/* ===== RENDER SECTIONS ===== */
+const main=document.getElementById("main");
+function renderTable(t){
+  let h='<div class="scroller"><table><thead><tr>';
+  t.head.forEach(x=>h+=`<th>${esc(x)}</th>`);
+  h+='</tr></thead><tbody>';
+  t.rows.forEach(r=>{
+    h+='<tr>';
+    r.forEach((c,i)=>h+=`<td${i===0?' class="it-term"':''}>${esc(c)}</td>`);
+    h+='</tr>';
+  });
+  return h+'</tbody></table></div>';
+}
+function renderCards(cards){
+  let h='<div class="cards">';
+  cards.forEach(c=>{
+    h+=`<button class="card" aria-expanded="false">
+      <div class="it">${esc(c.it)}</div>
+      <div class="front-foot">
+        <span class="lvl">${esc(c.lvl||"")}</span>
+        <span class="prompt">открыть ♥</span>
+      </div>
+      <div class="rvl"><div class="ru"><svg class="rvl-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-9.3-9C1.2 8.3 2.5 5 5.6 5c2 0 3.2 1.3 3.9 2.4l.1.2.1-.2C10.4 6.3 11.6 5 13.6 5c3.1 0 4.4 3.3 2.9 6-2.3 4.4-9.3 9-9.3 9z"/></svg>${esc(c.ru)}</div>${c.lit?`<div class="lit">${esc(c.lit)}</div>`:""}<div class="note">${esc(c.note)}</div></div>
+    </button>`;
+  });
+  return h+'</div>';
+}
+SECTIONS.forEach(s=>{
+  const sec=el("section"); sec.id=s.id;
+  let h='<div class="wrap">';
+  h+=`<div class="chapno">${esc(s.no)}</div>`;
+  h+=`<h2>${esc(s.title)}<span class="it">${esc(s.it)}</span></h2>`;
+  h+=`<p class="lede">${esc(s.lede)}</p>`;
+  if(s.blocks) s.blocks.forEach(b=>{
+    if(b.h) h+=`<h3 class="sub">${esc(b.h)}</h3>`;
+    if(b.p) h+=`<p>${esc(b.p)}</p>`;
+    if(b.table) h+=renderTable(b.table);
+  });
+  if(s.cards) h+=renderCards(s.cards);
+  if(s.note) h+=`<div class="note-block"><div class="h">${esc(s.note.h)}</div><p>${esc(s.note.p)}</p></div>`;
+  h+='</div>';
+  sec.innerHTML=h;
+  main.appendChild(sec);
+});
+document.addEventListener("click",e=>{
+  const c=e.target.closest(".card"); if(!c)return;
+  const o=c.classList.toggle("open"); c.setAttribute("aria-expanded",o?"true":"false");
+});
+
+/* ===== HERO ROULETTE ===== */
+const POOL=SECTIONS.filter(s=>s.cards).flatMap(s=>s.cards);
+const qIt=document.getElementById("qIt"),qRu=document.getElementById("qRu");
+function roll(){const c=POOL[Math.floor(Math.random()*POOL.length)];qIt.textContent=c.it;qRu.textContent=c.ru;}
+document.getElementById("roll").addEventListener("click",roll); roll();
+
+/* ===== TRAINER ===== */
+const stage=document.getElementById("stage"); let mode="flash";
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected","false"));
+  t.setAttribute("aria-selected","true"); mode=t.dataset.mode; render();
+}));
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+let deck=[],di=0,shown=false,known=0;
+function renderFlash(){
+  if(!deck.length){deck=shuffle(POOL);di=0;known=0;shown=false}
+  const c=deck[di];
+  stage.innerHTML=`<div class="meta">Карточка ${di+1} / ${deck.length} · знаю ${known}</div>
+   <div class="flash"><div class="it">${esc(c.it)}</div>
+   ${shown?`<div class="ru">${esc(c.ru)}</div><div class="note" style="color:var(--dim);font-size:14px">${esc(c.note)}</div>`:`<div class="hidden">перевод скрыт</div>`}</div>
+   <div class="row">${shown?`<button class="btn" data-a="know">Знаю</button><button class="btn" data-a="dunno">Не знаю</button>`:`<button class="btn solid" data-a="show">Показать перевод</button>`}
+   <button class="btn" data-a="reset">Перемешать</button></div>`;
+}
+function nextFlash(k){if(k)known++;di++;shown=false;
+  if(di>=deck.length){stage.innerHTML=`<div class="q">Колода пройдена.</div><p style="color:var(--dim)">Уверенно ${known} из ${deck.length}.</p><div class="row"><button class="btn solid" data-a="reset">Ещё раз</button></div>`;deck=[];return}
+  renderFlash();}
+
+let qi=0,qs=0,SET=[];
+function renderQuiz(){
+  SET = mode==="doppio"?DOPPIO:mode==="falsi"?FALSI:REGIONE;
+  if(qi>=SET.length){
+    stage.innerHTML=`<div class="q">Готово: <span class="em">${qs}</span> из ${SET.length}.</div><div class="row"><button class="btn solid" data-a="qReset">Заново</button></div>`;return}
+  const q=SET[qi];
+  if(mode==="regione"){
+    stage.innerHTML=`<div class="meta">Фраза ${qi+1} / ${SET.length} · верно ${qs}</div>
+     <p class="q">«<span class="em">${esc(q.f)}</span>» — откуда?</p>
+     <div class="opts">${q.o.map(o=>`<button class="opt" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+     <div class="feedback" id="fb"></div>`;
+  } else {
+    stage.innerHTML=`<div class="meta">Вопрос ${qi+1} / ${SET.length} · верно ${qs}</div>
+     <p class="q">${esc(q.q)}</p>
+     <div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")}</div>
+     <div class="feedback" id="fb"></div>`;
+  }
+}
+function render(){ if(mode==="flash")renderFlash(); else {qi=0;qs=0;renderQuiz()} }
+stage.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return;
+  const a=b.dataset.a;
+  if(a==="show"){shown=true;renderFlash();return}
+  if(a==="know"){nextFlash(true);return}
+  if(a==="dunno"){nextFlash(false);return}
+  if(a==="reset"){deck=[];renderFlash();return}
+  if(a==="qReset"){qi=0;qs=0;renderQuiz();return}
+  if(a==="qNext"){qi++;renderQuiz();return}
+  if(!b.classList.contains("opt"))return;
+  const q=SET[qi],opts=[...stage.querySelectorAll(".opt")],fb=document.getElementById("fb");
+  opts.forEach(o=>o.disabled=true);
+  if(mode==="regione"){
+    opts.forEach(o=>{if(o.dataset.v===q.a)o.classList.add("right")});
+    if(b.dataset.v===q.a)qs++; else b.classList.add("wrong");
+  } else {
+    const i=+b.dataset.i; opts[q.a].classList.add("right");
+    if(i===q.a)qs++; else b.classList.add("wrong");
+  }
+  fb.innerHTML=esc(q.e)+`<div class="row" style="margin-top:16px"><button class="btn" data-a="qNext">Дальше</button></div>`;
+  fb.classList.add("show");
+});
+render();
+
+/* ===== EXAM ===== */
+const exam=document.getElementById("exam"),cert=document.getElementById("cert");
+let ei=0,es=0;
+function renderExam(){
+  if(ei>=ESAME.length){
+    const rank=RANKS.find(r=>es>=r.min);
+    exam.innerHTML=`<div class="q"><span class="em">${es}</span> из ${ESAME.length}</div><div class="row"><button class="btn solid" data-a="eReset">Пересдать</button></div>`;
+    document.getElementById("certRank").textContent=rank.r;
+    document.getElementById("certLine").textContent=rank.l;
+    cert.classList.add("show"); cert.scrollIntoView({block:"center"}); return;
+  }
+  cert.classList.remove("show");
+  const q=ESAME[ei];
+  exam.innerHTML=`<div class="meta">Вопрос ${ei+1} / ${ESAME.length} · верно ${es}</div>
+   <p class="q">${esc(q.q)}</p>
+   <div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")}</div>
+   <div class="feedback" id="efb"></div>`;
+}
+exam.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return;
+  if(b.dataset.a==="eReset"){ei=0;es=0;renderExam();return}
+  if(b.dataset.a==="eNext"){ei++;renderExam();return}
+  if(!b.classList.contains("opt"))return;
+  const q=ESAME[ei],i=+b.dataset.i,opts=[...exam.querySelectorAll(".opt")];
+  opts.forEach(o=>o.disabled=true); opts[q.a].classList.add("right");
+  if(i===q.a)es++; else b.classList.add("wrong");
+  const fb=document.getElementById("efb");
+  fb.innerHTML=esc(q.e)+`<div class="row" style="margin-top:16px"><button class="btn" data-a="eNext">Дальше</button></div>`;
+  fb.classList.add("show");
+});
+renderExam();
+</script>
+</body>
+</html>
